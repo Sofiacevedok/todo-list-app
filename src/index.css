@@ -1,0 +1,30 @@
+:root {
+  font-family: sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+textarea,
+select {
+  font-family: sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+body {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0px 16px;
+  background-color: #f0f8ff24;
+}
+
+h3 {
+  margin-block: 0;
+}
+
+p {
+  margin: 0%;
+}

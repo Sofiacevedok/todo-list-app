@@ -1,0 +1,98 @@
+.containerAppForm {
+  padding: 24px 16px;
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #a0b8cd;
+  border-radius: 10px;
+  box-shadow: 10px 10px 49px -14px rgba(0, 0, 0, 0.48);
+  -webkit-box-shadow: 10px 10px 49px -14px rgba(0, 0, 0, 0.48);
+  -moz-box-shadow: 10px 10px 49px -14px rgba(0, 0, 0, 0.48);
+}
+
+.containerFilterForm {
+  display: flex;
+  width: -webkit-fill-available;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item {
+  flex: 1 1 calc(33.33% - 10px);
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-color: #f5f5f5;
+  text-align: center;
+  padding: 10px;
+}
+
+.center {
+  margin: auto;
+  display: block;
+}
+
+.select {
+  border: 2px solid #333333a3;
+  border-radius: 10px;
+  padding: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+}
+
+.select:focus {
+  border-color: #719ece;
+  box-shadow: 0 0 10px #719ece;
+}
+
+.select option:hover {
+  background-color: #0091ff !important;
+}
+
+.inputText {
+  padding: 9px;
+  border: 2px solid #333333a3;
+  border-radius: 10px;
+}
+
+.inputText:focus {
+  outline: none !important;
+  border: 1px solid #0091ff;
+  box-shadow: 0 0 10px #719ece;
+}
+
+.description {
+  border-radius: 10px;
+  padding: 16px;
+  border: 2px solid #333333a3;
+  width: -webkit-fill-available;
+}
+
+.description:focus {
+  outline: none !important;
+  border: 1px solid #0091ff;
+  box-shadow: 0 0 10px #719ece;
+}
+
+.button {
+  border-radius: 10px;
+  border: 2px solid #333333a3;
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #363f45;
+  background-color: #879cae;
+  color: white;
+  transition: border-color 0.25s;
+}
+
+button:focus-visible {
+  background-color: #2180d2;
+}

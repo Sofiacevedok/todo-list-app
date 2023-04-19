@@ -1,0 +1,69 @@
+.containerApp {
+  min-width: 600px;
+}
+
+.containerFilter {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.containerFilterTasks {
+  margin: 25px 0px 25px;
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+}
+
+.cards {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+
+.card {
+  gap: 10px;
+  background-color: aliceblue;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 600px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 10px 10px 49px -14px rgba(0, 0, 0, 0.48);
+  -webkit-box-shadow: 10px 10px 49px -14px rgba(0, 0, 0, 0.48);
+  -moz-box-shadow: 10px 10px 49px -14px rgba(0, 0, 0, 0.48);
+}
+
+.containerImg {
+  display: flex;
+  gap: 8px;
+  justify-content: space-around;
+}
+
+.containerImgAndFilters {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border: 1px solid #333333a3;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.filtersCard {
+  display: flex;
+  gap: 36px;
+}
+
+.p {
+  display: flex;
+  flex-direction: column;
+}
