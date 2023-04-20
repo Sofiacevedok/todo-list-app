@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { priorityOptions } from '../formCreate/FormCreate';
 import styles from '../formCreate/styleForm.module.css';
 
 export default function SelectPriority({ setSelectedPriority }) {
@@ -6,12 +7,6 @@ export default function SelectPriority({ setSelectedPriority }) {
     const selectedPriority = e.target.value;
     setSelectedPriority(selectedPriority);
   };
-
-  const options = [
-    { value: 'alta', label: 'Alta' },
-    { value: 'media', label: 'Media' },
-    { value: 'baja', label: 'Baja' },
-  ];
 
   return (
     <div className={styles.selectContainer}>
@@ -21,7 +16,7 @@ export default function SelectPriority({ setSelectedPriority }) {
         onChange={handlePriorityChange}
       >
         <option value="">Prioridad</option>
-        {options.map((option) => (
+        {priorityOptions.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>

@@ -1,0 +1,11 @@
+.containerSelectsFilter {
+  display: flex;
+  gap: 20px;
+}
+
+.containerFilter {
+  margin: 25px 0px 25px;
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+}

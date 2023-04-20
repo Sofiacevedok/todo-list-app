@@ -1,109 +1,46 @@
-import React, { useState } from 'react';
-import SelectPriority from '../filters/SelectPriority';
-import SelectState from '../filters/SelectState';
-import FormCreate from '../formCreate/FormCreate';
-import Modal from '../modal/Modal';
-import style from './showStyle.module.css';
-import DeleteIcon from '../../assets/deleteIcon.svg';
-import EditIcon from '../../assets/editIcon.svg';
+import React from 'react'
 
-export default function ShowTodos() {
-  const [tareas, setTareas] = useState([]);
-  const [selectedPriority, setSelectedPriority] = useState('');
-  const [selectedState, setSelectedState] = useState('');
-  const [modalState, setModalState] = useState({ show: false, taskId: null });
+import style from './showStyle.module.css'
+import DeleteIcon from '../../assets/deleteIcon.svg'
+import EditIcon from '../../assets/editIcon.svg'
 
-  const handleClose = () => {
-    setModalState((oldState) => ({ ...oldState, show: false }));
-  };
-
-  const handleOpen = (id) => {
-    setModalState({ show: true, taskId: id });
-  };
-
-  const updateSelectedPriority = (priority) => {
-    setSelectedPriority(priority);
-  };
-
-  const updateSelectedState = (state) => {
-    setSelectedState(state);
-  };
-
-  const handleDeleteTarea = (id) => {
-    const confirmacion = window.confirm(
-      '¿Seguro quieres realizar los cambios?'
-    );
-
-    if (confirmacion) {
-      const updatedTareas = tareas.filter((tarea) => tarea.id !== id);
-      setTareas(updatedTareas);
-    }
-  };
-
-  const filteredTareas = tareas.filter((tarea) => {
-    if (selectedPriority && tarea.priority !== selectedPriority) {
-      return false;
-    }
-    if (selectedState && tarea.state !== selectedState) {
-      return false;
-    }
-    return true;
-  });
-
-  const renderedTareas =
-    selectedPriority || selectedState ? filteredTareas : tareas;
-
+export default function ShowTodos({
+  tasksFiltered,
+  handleDeleteTask,
+  handleOpenModal,
+}) {
   return (
-    <div className={style.containerApp}>
-      <FormCreate tareas={tareas} setTareas={setTareas} />
-      <div className={style.containerFilterTasks}>
-        <h3>Filtrar tareas por:</h3>
-        <div className={style.containerFilter}>
-          <SelectPriority setSelectedPriority={updateSelectedPriority} />
-          <SelectState setSelectedState={updateSelectedState} />
-        </div>
-      </div>
-
-      <div className={style.cards}>
-        {renderedTareas.map((tarea) => (
-          <div className={style.card} key={tarea.id}>
-            <div className={style.containerImgAndFilters}>
-              <div className={style.filtersCard}>
-                <p>Prioridad: {tarea.priority}</p>
-                <p>Estado: {tarea.state}</p>
-              </div>
-              <div className={style.containerImg}>
-                <img
-                  className={style.img}
-                  onClick={() => handleOpen(tarea.id)}
-                  src={EditIcon}
-                  alt="Editar"
-                />
-                <img
-                  className={style.img}
-                  onClick={() => handleDeleteTarea(tarea.id)}
-                  src={DeleteIcon}
-                  alt="Eliminar"
-                />
-              </div>
+    <div className={style.cards}>
+      {tasksFiltered.map((task) => (
+        <div className={style.card} key={task.id}>
+          <div className={style.containerImgAndFilters}>
+            <div className={style.filtersCard}>
+              <p>Prioridad: {task.priority}</p>
+              <p>Estado: {task.state}</p>
             </div>
-            <p>
-              Título: <span> {tarea.title}</span>
-            </p>
-            <p className={style.p}>
-              Descripción: <span>{tarea.description}</span>
-            </p>
+            <div className={style.containerImg}>
+              <img
+                className={style.img}
+                onClick={() => handleOpenModal(task.id)}
+                src={EditIcon}
+                alt="Editar"
+              />
+              <img
+                className={style.img}
+                onClick={() => handleDeleteTask(task.id)}
+                src={DeleteIcon}
+                alt="Eliminar"
+              />
+            </div>
           </div>
-        ))}
-      </div>
-      <Modal show={modalState.show} handleClose={handleClose}>
-        <FormCreate
-          tareas={tareas}
-          setTareas={setTareas}
-          taskId={modalState.taskId}
-          handleClose={handleClose}
-        />
-      </Modal>
+          <p>
+            Título: <span> {task.title}</span>
+          </p>
+          <p className={style.p}>
+            Descripción: <span>{task.description}</span>
+          </p>
+        </div>
+      ))}
     </div>
-  );
+  )
 }

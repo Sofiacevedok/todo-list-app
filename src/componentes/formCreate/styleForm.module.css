@@ -96,3 +96,23 @@ button:hover {
 button:focus-visible {
   background-color: #2180d2;
 }
+
+.buttonsModal {
+  display: flex;
+  width: -webkit-fill-available;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 575px) {
+  .containerFilterForm {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .inputText,
+  .selectStyles {
+    width: -webkit-fill-available;
+  }
+  .description {
+    height: 100px;
+  }
+}

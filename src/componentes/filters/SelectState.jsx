@@ -1,4 +1,5 @@
 import React from 'react';
+import { statusOptions } from '../formCreate/FormCreate';
 import styles from '../formCreate/styleForm.module.css';
 
 export default function SelectPriority({ setSelectedState }) {
@@ -6,12 +7,6 @@ export default function SelectPriority({ setSelectedState }) {
     const selectedState = e.target.value;
     setSelectedState(selectedState);
   };
-
-  const options2 = [
-    { value: 'nueva', label: 'Nueva' },
-    { value: 'en proceso', label: 'En proceso' },
-    { value: 'finalizada', label: 'Finalizada' },
-  ];
 
   return (
     <div className={styles.selectContainer}>
@@ -21,7 +16,7 @@ export default function SelectPriority({ setSelectedState }) {
         onChange={handleStateChange}
       >
         <option value="">Estado</option>
-        {options2.map((option) => (
+        {statusOptions.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>

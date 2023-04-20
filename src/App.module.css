@@ -1,0 +1,15 @@
+.containerApp {
+  width: 600px;
+  padding: 32px 0px;
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 575px) {
+  .containerApp {
+    width: 100vw;
+    min-height: 100vh;
+    padding: 16px;
+  }
+}

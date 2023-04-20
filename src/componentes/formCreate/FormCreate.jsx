@@ -1,32 +1,36 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import styles from './styleForm.module.css';
+import React, { useState, useEffect } from 'react'
+import InputSelect from '../common/inputSelect/InputSelect'
+import styles from './styleForm.module.css'
 
-const FormCreate = ({ tareas, setTareas, taskId, handleClose }) => {
+export const priorityOptions = [
+  { key: 'high', value: 'Alta' },
+  { key: 'medium', value: 'Media' },
+  { key: 'low', value: 'Baja' },
+]
+
+export const statusOptions = [
+  { key: 'new', value: 'Nueva' },
+  { key: 'process', value: 'En proceso' },
+  { key: 'done', value: 'Finalizada' },
+]
+
+const FormCreate = ({ tasks, setTasks, taskId, handleClose }) => {
   const [input, setInput] = useState({
     title: '',
     priority: '',
-    state: '',
+    state: 'Nueva',
     description: '',
-  });
+  })
 
   const handleInputChange = (e) => {
-    const newInput = {
-      ...input,
-      [e.target.name]: e.target.value,
-    };
-
-    setInput(newInput);
-  };
+    setInput((oldState) => ({ ...oldState, [e.target.name]: e.target.value }))
+  }
 
   const handleEditTask = (e) => {
-    const confirmacion = window.confirm(
-      '¿Seguro quieres realizar los cambios?'
-    );
-    console.log(confirmacion);
+    const confirmacion = window.confirm('¿Seguro quieres realizar los cambios?')
 
     if (confirmacion) {
-      e.preventDefault();
+      e.preventDefault()
 
       const editTask = {
         title: input.title,
@@ -34,132 +38,109 @@ const FormCreate = ({ tareas, setTareas, taskId, handleClose }) => {
         state: input.state,
         description: input.description,
         id: taskId,
-      };
+      }
 
-      const newEditTask = tareas.map((task) => {
+      const newEditTask = tasks.map((task) => {
         if (task.id === taskId) {
-          return editTask;
+          return editTask
         } else {
-          return task;
+          return task
         }
-      });
-      setTareas(newEditTask);
-      handleClose();
+      })
+      setTasks(newEditTask)
+      handleClose()
     } else {
-      handleClose();
+      handleClose()
     }
-  };
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     const nuevaTarea = {
       title: input.title,
       priority: input.priority,
-      state: input.state ? input.state : 'nueva',
+      state: input.state,
       description: input.description,
-      id: tareas.length + 1,
-    };
+      id: tasks.length + 1,
+    }
 
-    setTareas([...tareas, nuevaTarea]);
+    setTasks([...tasks, nuevaTarea])
     setInput({
       title: '',
       priority: '',
-      state: '',
+      state: 'Nueva',
       description: '',
-    });
-  };
+    })
+  }
 
   useEffect(() => {
-    if (tareas.length && taskId) {
-      const indexElement = tareas.findIndex(function (task) {
-        return task.id === taskId;
-      });
-      setInput(tareas[indexElement]);
+    if (tasks.length && taskId) {
+      const indexElement = tasks.findIndex(function (task) {
+        return task.id === taskId
+      })
+      setInput(tasks[indexElement])
     }
-  }, [taskId]);
-
-  const options = [
-    { value: 'alta', label: 'Alta' },
-    { value: 'media', label: 'Media' },
-    { value: 'baja', label: 'Baja' },
-  ];
-
-  const options2 = [
-    { value: 'nueva', label: 'Nueva' },
-    { value: 'en proceso', label: 'En proceso' },
-    { value: 'finalizada', label: 'Finalizada' },
-  ];
+  }, [taskId])
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className={styles.containerAppForm}>
-        <div className={styles.containerFilterForm}>
-          <input
-            className={styles.inputText}
-            type="text"
-            name="title"
-            value={input.title}
-            placeholder="Titulo..."
-            onChange={handleInputChange}
-            required={true}
-          />
-
-          <div className={styles.selectContainer}>
-            <select
-              className={styles.select}
-              name="priority"
-              onChange={handleInputChange}
-              required={true}
-            >
-              <option value={input.priority}>Prioridad</option>
-              {options.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className={styles.selectContainer}>
-            <select
-              className={styles.select}
-              name="state"
-              onChange={handleInputChange}
-              //required={true}
-            >
-              <option value={input.state}>Estado</option>
-              {options2.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <textarea
-          className={styles.description}
-          name="description"
-          value={input.description}
-          rows="8"
-          cols="75"
-          placeholder="Descripción..."
+    <div className={styles.containerAppForm}>
+      <div className={styles.containerFilterForm}>
+        <input
+          className={styles.inputText}
+          type="text"
+          name="title"
+          value={input.title}
+          placeholder="Titulo..."
           onChange={handleInputChange}
           required={true}
         />
 
-        {taskId ? (
-          <button className={styles.button} onClick={(e) => handleEditTask(e)}>
-            Editar tarea
-          </button>
-        ) : (
-          <button className={styles.button} type="submit">
-            Crear tarea
-          </button>
-        )}
-      </div>
-    </form>
-  );
-};
+        <InputSelect
+          options={priorityOptions}
+          name="priority"
+          label={'Prioridad'}
+          onChange={handleInputChange}
+          value={input.priority}
+          className={styles.selectStyles}
+        />
 
-export default FormCreate;
+        <InputSelect
+          options={statusOptions}
+          name="state"
+          onChange={handleInputChange}
+          value={input.state}
+          className={styles.selectStyles}
+        />
+      </div>
+
+      <textarea
+        className={styles.description}
+        name="description"
+        value={input.description}
+        rows="8"
+        cols="75"
+        placeholder="Descripción..."
+        onChange={handleInputChange}
+        required={true}
+      />
+
+      {taskId ? (
+        <div className={styles.buttonsModal}>
+          <button className={styles.button} onClick={() => handleClose()}>
+            Cancelar
+          </button>
+          <button className={styles.button} onClick={(e) => handleEditTask(e)}>
+            Guardar cambios
+          </button>
+        </div>
+      ) : (
+        <button className={styles.button} onClick={handleSubmit}>
+          Crear tarea
+        </button>
+      )}
+    </div>
+  )
+}
+
+export default FormCreate
