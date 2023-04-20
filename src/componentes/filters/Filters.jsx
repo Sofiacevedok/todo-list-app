@@ -18,6 +18,7 @@ const Filters = ({ updateFilters, filters }) => {
           label={'Prioridad'}
           onChange={handleInputChange}
           value={filters.priority}
+          className={styles.select}
         />
 
         <InputSelect
@@ -26,6 +27,7 @@ const Filters = ({ updateFilters, filters }) => {
           label={'Estado'}
           onChange={handleInputChange}
           value={filters.state}
+          className={styles.select}
         />
       </div>
     </div>

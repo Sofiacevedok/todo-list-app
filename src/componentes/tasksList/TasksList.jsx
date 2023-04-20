@@ -1,10 +1,9 @@
 import React from 'react'
-
-import style from './showStyle.module.css'
+import style from './tasksList.module.css'
 import DeleteIcon from '../../assets/deleteIcon.svg'
 import EditIcon from '../../assets/editIcon.svg'
 
-export default function ShowTodos({
+export default function TasksList({
   tasksFiltered,
   handleDeleteTask,
   handleOpenModal,

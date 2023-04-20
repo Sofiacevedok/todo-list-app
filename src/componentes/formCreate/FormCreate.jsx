@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import InputSelect from '../common/inputSelect/InputSelect'
-import styles from './styleForm.module.css'
+import styles from './formCreate.module.css'
 
 export const priorityOptions = [
   { key: 'high', value: 'Alta' },
@@ -85,60 +85,66 @@ const FormCreate = ({ tasks, setTasks, taskId, handleClose }) => {
 
   return (
     <div className={styles.containerAppForm}>
-      <div className={styles.containerFilterForm}>
-        <input
-          className={styles.inputText}
-          type="text"
-          name="title"
-          value={input.title}
-          placeholder="Titulo..."
+      <form onSubmit={handleSubmit} style={{ display: 'contents' }}>
+        <div className={styles.containerFilterForm}>
+          <input
+            className={styles.inputText}
+            type="text"
+            name="title"
+            value={input.title}
+            placeholder="Titulo..."
+            onChange={handleInputChange}
+            required={true}
+          />
+
+          <InputSelect
+            options={priorityOptions}
+            name="priority"
+            label={'Prioridad'}
+            onChange={handleInputChange}
+            value={input.priority}
+            className={styles.selectStyles}
+            required
+          />
+
+          <InputSelect
+            options={statusOptions}
+            name="state"
+            onChange={handleInputChange}
+            value={input.state}
+            className={styles.selectStyles}
+          />
+        </div>
+
+        <textarea
+          className={styles.description}
+          name="description"
+          value={input.description}
+          rows="8"
+          cols="75"
+          placeholder="Descripción..."
           onChange={handleInputChange}
           required={true}
         />
 
-        <InputSelect
-          options={priorityOptions}
-          name="priority"
-          label={'Prioridad'}
-          onChange={handleInputChange}
-          value={input.priority}
-          className={styles.selectStyles}
-        />
-
-        <InputSelect
-          options={statusOptions}
-          name="state"
-          onChange={handleInputChange}
-          value={input.state}
-          className={styles.selectStyles}
-        />
-      </div>
-
-      <textarea
-        className={styles.description}
-        name="description"
-        value={input.description}
-        rows="8"
-        cols="75"
-        placeholder="Descripción..."
-        onChange={handleInputChange}
-        required={true}
-      />
-
-      {taskId ? (
-        <div className={styles.buttonsModal}>
-          <button className={styles.button} onClick={() => handleClose()}>
-            Cancelar
+        {taskId ? (
+          <div className={styles.buttonsModal}>
+            <button className={styles.button} onClick={() => handleClose()}>
+              Cancelar
+            </button>
+            <button
+              className={styles.button}
+              onClick={(e) => handleEditTask(e)}
+            >
+              Guardar cambios
+            </button>
+          </div>
+        ) : (
+          <button className={styles.button} type="submit">
+            Crear tarea
           </button>
-          <button className={styles.button} onClick={(e) => handleEditTask(e)}>
-            Guardar cambios
-          </button>
-        </div>
-      ) : (
-        <button className={styles.button} onClick={handleSubmit}>
-          Crear tarea
-        </button>
-      )}
+        )}
+      </form>
     </div>
   )
 }

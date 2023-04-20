@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import Filters from './componentes/filters/Filters'
 import FormCreate from './componentes/formCreate/FormCreate'
-import ShowTodos from './componentes/showTodos/ShowTodos'
 import styles from './App.module.css'
 import Modal from './componentes/modal/Modal'
+import TasksList from './componentes/tasksList/TasksList'
 
 function App() {
   const [tasks, setTasks] = useState([])
@@ -47,20 +47,22 @@ function App() {
     (filters.state.length || filters.priority.length) && !tasksFiltered.length
   return (
     <div className={styles.containerApp}>
-      <FormCreate tasks={tasks} setTasks={setTasks} />
-      <Filters filters={filters} updateFilters={updateFilters} />
-      {tasks.length && noResultsFilters ? (
-        <div>No se encontraron tareas para los filtros seleccionados...</div>
-      ) : null}
-      {tasks.length ? (
-        <ShowTodos
-          tasksFiltered={tasksFiltered}
-          handleDeleteTask={handleDeleteTask}
-          handleOpenModal={handleOpenModal}
-        />
-      ) : (
-        <div>No existen tareas aún...</div>
-      )}
+      <div className={styles.layout}>
+        <FormCreate tasks={tasks} setTasks={setTasks} />
+        <Filters filters={filters} updateFilters={updateFilters} />
+        {tasks.length && noResultsFilters ? (
+          <div>No se encontraron tareas para los filtros seleccionados...</div>
+        ) : null}
+        {tasks.length ? (
+          <TasksList
+            tasksFiltered={tasksFiltered}
+            handleDeleteTask={handleDeleteTask}
+            handleOpenModal={handleOpenModal}
+          />
+        ) : (
+          <div>No existen tareas aún...</div>
+        )}
+      </div>
       <Modal show={modalState.show} handleClose={handleCloseModal}>
         <FormCreate
           tasks={tasks}
