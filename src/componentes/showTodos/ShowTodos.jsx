@@ -12,7 +12,6 @@ export default function ShowTodos() {
   const [selectedPriority, setSelectedPriority] = useState('');
   const [selectedState, setSelectedState] = useState('');
   const [modalState, setModalState] = useState({ show: false, taskId: null });
-  const [showFullText, setShowFullText] = useState(false);
 
   const handleClose = () => {
     setModalState((oldState) => ({ ...oldState, show: false }));
@@ -76,15 +75,15 @@ export default function ShowTodos() {
               <div className={style.containerImg}>
                 <img
                   className={style.img}
-                  onClick={() => handleDeleteTarea(tarea.id)}
-                  src={DeleteIcon}
-                  alt="Eliminar"
-                />
-                <img
-                  className={style.img}
                   onClick={() => handleOpen(tarea.id)}
                   src={EditIcon}
                   alt="Editar"
+                />
+                <img
+                  className={style.img}
+                  onClick={() => handleDeleteTarea(tarea.id)}
+                  src={DeleteIcon}
+                  alt="Eliminar"
                 />
               </div>
             </div>

@@ -6,7 +6,7 @@ const FormCreate = ({ tareas, setTareas, taskId, handleClose }) => {
   const [input, setInput] = useState({
     title: '',
     priority: '',
-    state: 'Nueva',
+    state: '',
     description: '',
   });
 
@@ -23,6 +23,7 @@ const FormCreate = ({ tareas, setTareas, taskId, handleClose }) => {
     const confirmacion = window.confirm(
       '¿Seguro quieres realizar los cambios?'
     );
+    console.log(confirmacion);
 
     if (confirmacion) {
       e.preventDefault();
@@ -55,7 +56,7 @@ const FormCreate = ({ tareas, setTareas, taskId, handleClose }) => {
     const nuevaTarea = {
       title: input.title,
       priority: input.priority,
-      state: input.state,
+      state: input.state ? input.state : 'nueva',
       description: input.description,
       id: tareas.length + 1,
     };
@@ -124,7 +125,7 @@ const FormCreate = ({ tareas, setTareas, taskId, handleClose }) => {
               className={styles.select}
               name="state"
               onChange={handleInputChange}
-              required={true}
+              //required={true}
             >
               <option value={input.state}>Estado</option>
               {options2.map((option) => (
